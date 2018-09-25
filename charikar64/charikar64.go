@@ -5,6 +5,9 @@ import (
 )
 
 const Size = 8
+const ShingleSize = 8
+
+var empty = make([]byte, ShingleSize)
 
 type Charikar64 struct {
 	counter [64]int32
@@ -15,18 +18,24 @@ func (d *Charikar64) Reset() {
 	for i := 0; i < 64; i++ {
 		d.counter[i] = 0
 	}
-	empty := make([]byte, 8)
 	d.rollsum.Reset()
 	d.rollsum.Write(empty)
+	s := d.rollsum.Sum64()
+	for i := 0; i < 64; i++ {
+		if s & (1 << uint(i)) > 0 {
+			d.counter[i]++
+		} else {
+			d.counter[i]--
+		}
+	}
 }
 
-func New() *Charikar64 {
-	rollsum := buzhash64.New()
-	empty := make([]byte, 8)
-	rollsum.Write(empty)
-	return &Charikar64{
-		rollsum : rollsum,
+func New() (digest *Charikar64) {
+	digest = &Charikar64{
+		rollsum : buzhash64.New(),
 	}
+	digest.Reset()
+	return digest
 }
 
 func (d *Charikar64) Size() int { return Size }

@@ -12,13 +12,13 @@ var golden = []struct {
 	out       uint64
 	in        string
 }{
-	{0xffffffffffffffff, ""},
-	{0xecbe3bd72fbc950d, "hello world 1"},
-	{0xecbc39d72bb8950d, "hello world 2"},
-	{0xecbe39d72bb8950d, "hello world 3"},
-	{0x38370f452a65abfb, "the quick brown fox jumps over the lazy dog"},
-	{0x7b3e2b252867bf9f, "The quick brown fox jumps over the lazy dog"},
-	{0xfb3eab252867bfbf, "The quick brown fox jumps over the lazy dog!"},
+	{0x185d611da9009af5, ""},
+	{0xfcbf3bdfafbc9f0d, "hello world 1"},
+	{0xecbd39d7abb8970d, "hello world 2"},
+	{0xfcbf39dfabb8978d, "hello world 3"},
+	{0x383f0f4d2a65abfb, "the quick brown fox jumps over the lazy dog"},
+	{0x7b3e2b252867bfff, "The quick brown fox jumps over the lazy dog"},
+	{0x7b3e29252865bfbf, "The quick brown fox jumps over the lazy dog!"},
 }
 
 func TestGolden(t *testing.T) {
